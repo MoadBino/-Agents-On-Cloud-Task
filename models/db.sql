@@ -22,6 +22,8 @@ CREATE TABLE Products(
     product_name VARCHAR(255),
     price INT,
     description TEXT,
+    user_id int,
+    FOREIGN KEY (user_id) REFERENCES users (user_id),
     is_deleted TINYINT DEFAULT 0,
     PRIMARY KEY (Product_id)
 );
