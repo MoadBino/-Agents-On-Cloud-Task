@@ -34,8 +34,8 @@ CREATE TABLE Products(
 CREATE TABLE cart (
     cart_id INT AUTO_INCREMENT NOT NULL,
     product_id int,
-    FOREIGN KEY (product_id) REFERENCES products(product_id),
     user_id int,
+    FOREIGN KEY (product_id) REFERENCES products(product_id),
     FOREIGN KEY (user_id) REFERENCES users (user_id),
     quantity int,
     price_checkout int,
