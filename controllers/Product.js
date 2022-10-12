@@ -31,9 +31,9 @@ const getAll = (req, res) => {
       res.status(500).json({
         success: false,
         mesage: "server error",
-        err
+        err,
       });
-      return
+      return;
     }
     res.status(201).json({
       success: true,
@@ -42,11 +42,111 @@ const getAll = (req, res) => {
   });
 };
 
+const ediatProduct = (req, res) => {
+  const { id } = req.params;
+  const query = "SELECT * FROM Products WHERE product_id=?";
+  const data = [id];
+  connection.query(query, data, (err, result) => {
+    if (err) {
+      res.status(500).json({
+        success: false,
+        mesage: "server error",
+        err,
+      });
+      return;
+    }
+    const { picUrlProd, title, product_name, price, description } = req.body;
+    const data = [
+      picUrlProd || result[0].picUrlProd,
+      title || result[0].title,
+      product_name || result[0].product_name,
+      price || result[0].price,
+      description || result[0].description,
+      id,
+    ];
+    const query = `UPDATE Products SET picUrlProd=?, title=?, product_name=?, price=?, description=? WHERE product_id=? `;
+    connection.query(query, data, (err, result2) => {
+      if (err) {
+        res.status(500).json({
+          success: false,
+          mesage: "server error",
+          err,
+        });
+        return;
+      }
+      res.status(201).json({
+        success: true,
+        result2,
+      });
+    });
+  });
+};
 
+const getProductById = (req, res) => {
+  const { id } = req.params;
+  const query = "SELECT * FROM Products WHERE product_id=?";
+  const data = [id];
+  connection.query(query, data, (err, result) => {
+    if (err) {
+      res.status(500).json({
+        success: false,
+        mesage: "server error",
+        err,
+      });
+      return;
+    }
+    res.status(201).json({
+      success: true,
+      result,
+    });
+  });
+};
 
+const getUserProducts = (req, res) => {
+  const { id } = req.params;
+  const query = "SELECT * FROM Products where user_id=?";
+  const data = [id];
+  connection.query(query, data, (err, result) => {
+    if (err) {
+      res.status(500).json({
+        success: false,
+        mesage: "server error",
+        err,
+      });
+      return;
+    }
+    res.status(201).json({
+      success: true,
+      result,
+    });
+  });
+};
 
+const deleteProdacts = (req, res) => {
+  const { id } = req.params;
+  const query = "DELETE FROM Products WHERE product_id=?";
+  const data = [id];
+  connection.query(query, data, (err, result) => {
+    if (err) {
+      res.status(500).json({
+        success: false,
+        mesage: "server error",
+        err,
+      });
+      return;
+    }
+    res.status(201).json({
+      success: true,
+      result,
+    });
+  });
+};
 
 module.exports = {
   addProducts,
   getAll,
+  ediatProduct,
+  getProductById,
+  getUserProducts,
+  deleteProdacts,
 };
