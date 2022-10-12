@@ -52,7 +52,6 @@ CREATE TABLE favorite_list (
     user_id int,
     FOREIGN KEY (product_id) REFERENCES products(product_id),
     FOREIGN KEY (user_id) REFERENCES users (user_id),
-    price_checkout int,
     is_deleted TINYINT DEFAULT 0,
     PRIMARY KEY (favorite_list)
 );
