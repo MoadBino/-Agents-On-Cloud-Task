@@ -55,3 +55,14 @@ CREATE TABLE favorite_list (
     is_deleted TINYINT DEFAULT 0,
     PRIMARY KEY (favorite_list)
 );
+
+CREATE TABLE comments (
+    comments_id INT AUTO_INCREMENT NOT NULL,
+    comment VARCHAR(255),
+    product_id int,
+    user_id int,
+    FOREIGN KEY (product_id) REFERENCES products(product_id),
+    FOREIGN KEY (user_id) REFERENCES users (user_id),
+    is_deleted TINYINT DEFAULT 0,
+    PRIMARY KEY (comments_id)
+);
