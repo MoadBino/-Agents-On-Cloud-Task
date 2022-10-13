@@ -25,7 +25,7 @@ const Myiteams = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((resulit) => {
-        console.log(resulit.data.result);
+
         dispatch(getUserProducts(resulit.data.result));
       })
       .catch((err) => {
