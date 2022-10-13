@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Faviortmodal from "../modals/favorit";
 import axios from "axios";
+import Addtocart from "../cart/addtocart";
 import { useDispatch, useSelector } from "react-redux";
 const Home = () => {
+  const token = localStorage.getItem("token") || "";
   const [page, setPage] = useState(1);
   const [prodaicts, setProdaicts] = useState("");
   const [open, setOpen] = useState(false);
@@ -13,7 +15,7 @@ const Home = () => {
       faviort: state.favorit.FavoritId,
     };
   });
-  console.log(state.faviort);
+
   useEffect(() => {
     axios
       .get(`http://localhost:5000/Products/getall/${page}`)
@@ -30,12 +32,18 @@ const Home = () => {
       {prodaicts &&
         prodaicts.map((element) => {
           let color = "black";
-
           return (
             <div className="mainpro" key={element.product_id}>
               <p> {element.title} </p>
               <img style={{ width: "200px" }} src={element.picUrlProd}></img>
-              <button> add to cart</button>
+              <button
+                onClick={() => {
+                  console.log(element.product_id);
+                  Addtocart((element.product_id, element.price));
+                }}
+              >
+                add to cart
+              </button>
               {state.faviort.includes(element.product_id) ? (
                 <button
                   style={{ backgroundColor: "gold" }}

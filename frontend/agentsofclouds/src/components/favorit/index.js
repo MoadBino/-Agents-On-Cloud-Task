@@ -12,7 +12,6 @@ const Favorit = () => {
       faviort: state.favorit.Favorit,
     };
   });
-  console.log(state);
   const dispatch = useDispatch();
   const token = localStorage.getItem("token") || "";
 
@@ -22,7 +21,6 @@ const Favorit = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((resulit) => {
-        console.log(resulit);
         dispatch(getFavoritList(resulit.data.result));
       })
       .catch((err) => {
