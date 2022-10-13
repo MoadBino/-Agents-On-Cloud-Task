@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { login } from "../redux/reducer/login/login";
+import { useDispatch } from "react-redux";
 const Login = () => {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const Login = () => {
@@ -10,7 +13,7 @@ const Login = () => {
         password,
       })
       .then((resluit) => {
-        console.log(resluit);
+        dispatch(login(resluit.data.token));
       })
       .catch((err) => {
         console.log(err);

@@ -4,6 +4,7 @@ import Register from "./components/register/index";
 import Login from "./components/login";
 import Navbar from "./components/navbar";
 import Home from "./components/home";
+import Myiteams from "./components/myiteams";
 import Addprodaict from "./components/addprodacit";
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       {/* <Navbar /> */}
       {/* <Addprodaict/> */}
       <Routes>
+        <Route path="/myiteams" element={<Myiteams />}></Route>
         <Route path="/home" element={<Home />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
