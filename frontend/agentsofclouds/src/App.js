@@ -12,6 +12,7 @@ import Myiteams from "./components/myiteams";
 import Cart from "./components/cart";
 import Prodactmodal from "./components/modals/prodact";
 import Addprodaict from "./components/addprodacit";
+import Byid from "./components/prodaictById";
 import Favorit from "./components/favorit";
 function App() {
   const dispatch = useDispatch();
@@ -22,7 +23,6 @@ function App() {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((resulit) => {
-
         dispatch(getFavoritList(resulit.data.result));
       })
       .catch((err) => {
@@ -32,7 +32,7 @@ function App() {
 
   return (
     <div className="App">
-      {/* <Navbar /> */}
+      <Navbar />
       {/* <Addprodaict/> */}
       <Routes>
         <Route path="/cart" element={<Cart />}></Route>
@@ -41,6 +41,7 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/Favorit" element={<Favorit />}></Route>
+        <Route path="/byid/:id" element={<Byid />}></Route>
       </Routes>
     </div>
   );

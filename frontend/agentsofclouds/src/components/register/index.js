@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import "./styel.css";
 import { useNavigate } from "react-router-dom";
 const Register = () => {
   const [name, setName] = useState("");
@@ -33,17 +34,21 @@ const Register = () => {
   };
 
   return (
-    <div>
-      {input("username", setName)}
-      {input("password", setPassword)}
-      {input("email", setEmail)}
-      <button
-        onClick={() => {
-          register();
-        }}
-      >
-        register
-      </button>
+    <div className="mainRegister">
+      <div className="background">
+        <div className="childregister">
+          {input("username", setName)}
+          {input("password", setPassword)}
+          {input("email", setEmail)}
+        </div>
+        <button
+          onClick={() => {
+            register();
+          }}
+        >
+          register
+        </button>
+      </div>
     </div>
   );
 };

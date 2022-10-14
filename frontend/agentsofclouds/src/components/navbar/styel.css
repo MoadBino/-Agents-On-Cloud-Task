@@ -1,0 +1,23 @@
+.maindivnavbar {
+  margin-bottom: 1rem;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.childdivnavbar {
+  display: flex;
+  gap: 2rem;
+  margin-right: 5rem;
+}
+.childdivnavbar h3 {
+  font-size: 1.3rem;
+  color: black;
+  text-decoration: none;
+}
+.childdivnavbar button {
+  font-size: 1.3rem;
+  color: black;
+  border-style: none;
+  background-color: white;
+}

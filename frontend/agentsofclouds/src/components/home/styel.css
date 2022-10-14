@@ -1,0 +1,21 @@
+.mainpro {
+  display: grid;
+  border-style: outset;
+  align-items: center;
+  width: 20rem;
+  margin-bottom: 2rem;
+  height: 23rem;
+  justify-content: center;
+}
+.maindiv {
+  display: grid;
+  justify-content: space-evenly;
+  grid-template-columns: auto auto auto auto;
+}
+.mainpro img{
+
+}
+.favCart {
+  display: flex;
+  gap: 2rem;
+}

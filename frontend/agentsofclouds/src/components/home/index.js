@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import "./styel.css";
+import { Link } from "react-router-dom";
 import Faviortmodal from "../modals/favorit";
 import axios from "axios";
 import Addtocart from "../cart/addtocart";
@@ -17,7 +19,6 @@ const Home = () => {
     };
   });
 
-
   useEffect(() => {
     axios
       .get(`http://localhost:5000/Products/getall/${page}`)
@@ -33,63 +34,51 @@ const Home = () => {
     <div className="maindiv">
       {prodaicts &&
         prodaicts.map((element) => {
-
           let color = "black";
           return (
+              <Link to={`/byid/${element.product_id}`}>
             <div className="mainpro" key={element.product_id}>
-              <p> {element.title} </p>
-              <img style={{ width: "200px" }} src={element.picUrlProd}></img>
-              <button
-                onClick={() => {
-                  console.log("add cart");
-                  let id = element.product_id;
-                  console.log(id);
-                  let price = +element.price;
-                  Addtocart(id, price);
-                }}
-              >
-                add to cart
-              </button>
-              {state.faviort.includes(element.product_id) ? (
+                <p> {element.title} </p>
+                <img style={{ width: "200px" }} src={element.picUrlProd}></img>
+                <div className="favCart">
                 <button
-                  style={{ backgroundColor: "gold" }}
                   onClick={() => {
-                    setmethod("delete");
-                    setId(element.product_id);
-                    setOpen(true);
+                    let id = element.product_id;
+                    let price = +element.price;
+                    Addtocart(id, price);
                   }}
                 >
-                  delete from faviort
+                  add to cart
                 </button>
-              ) : (
-                <button
-                  style={{ backgroundColor: { color } }}
-                  onClick={() => {
-                    setmethod("post");
-                    setId(element.product_id);
-                    setOpen(true);
-                  }}
-                >
-                  add to faviort
-                </button>
-              )}
+                {state.faviort.includes(element.product_id) ? (
+                  <button
+                    style={{ backgroundColor: "gold" }}
+                    onClick={() => {
+                      setmethod("delete");
+                      setId(element.product_id);
+                      setOpen(true);
+                    }}
+                  >
+                    delete from faviort
+                  </button>
+                ) : (
+                  <button
+                    style={{ backgroundColor: { color } }}
+                    onClick={() => {
+                      setmethod("post");
+                      setId(element.product_id);
+                      setOpen(true);
+                    }}
+                  >
+                    add to faviort
+                  </button>
+                )}
+                </div>
             </div>
+              </Link>
           );
         })}
-      <style jsx>{`
-        .mainpro {
-          display: grid;
-          border-style: outset;
-          width: 20rem;
-          justify-content: center;
-        }
-        .maindiv {
-          display: grid;
-          justify-content: center;
-          gap: 30px;
-          grid-template-columns: auto auto;
-        }
-      `}</style>
+
       <Faviortmodal open={open} method={method} id={id} setOpen={setOpen} />
     </div>
   );
