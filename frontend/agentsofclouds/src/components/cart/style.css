@@ -1,0 +1,12 @@
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.imgquan {
+  display: flex;
+  gap: 10rem;
+}
+.imgquan button {
+  height: 5vh;
+}

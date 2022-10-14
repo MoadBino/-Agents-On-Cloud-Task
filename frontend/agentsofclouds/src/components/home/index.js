@@ -10,11 +10,13 @@ const Home = () => {
   const [open, setOpen] = useState(false);
   const [method, setmethod] = useState("");
   const [id, setId] = useState("");
+
   const state = useSelector((state) => {
     return {
       faviort: state.favorit.FavoritId,
     };
   });
+
 
   useEffect(() => {
     axios
@@ -31,6 +33,7 @@ const Home = () => {
     <div className="maindiv">
       {prodaicts &&
         prodaicts.map((element) => {
+
           let color = "black";
           return (
             <div className="mainpro" key={element.product_id}>
@@ -38,8 +41,11 @@ const Home = () => {
               <img style={{ width: "200px" }} src={element.picUrlProd}></img>
               <button
                 onClick={() => {
-                  console.log(element.product_id);
-                  Addtocart((element.product_id, element.price));
+                  console.log("add cart");
+                  let id = element.product_id;
+                  console.log(id);
+                  let price = +element.price;
+                  Addtocart(id, price);
                 }}
               >
                 add to cart
