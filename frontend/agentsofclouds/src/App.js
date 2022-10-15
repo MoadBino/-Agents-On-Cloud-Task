@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
 import { getFavoritList } from "./components/redux/reducer/Favorit";
@@ -10,11 +10,13 @@ import Navbar from "./components/navbar";
 import Home from "./components/home";
 import Myiteams from "./components/myiteams";
 import Cart from "./components/cart";
-import Prodactmodal from "./components/modals/prodact";
-import Addprodaict from "./components/addprodacit";
+
+import Addprodacit from "./components/modals/addprodacit";
+
 import Byid from "./components/prodaictById";
 import Favorit from "./components/favorit";
 function App() {
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
   useEffect(() => {
@@ -33,7 +35,8 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <Addprodaict/> 
+
+
       <Routes>
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/myiteams" element={<Myiteams />}></Route>

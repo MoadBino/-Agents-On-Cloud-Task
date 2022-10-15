@@ -7,7 +7,6 @@ const CDUComment = ({ method, setOpen, open, pro_id }) => {
   const [openmodal, setOpenmodal] = useState(false);
   const [comment, setComment] = useState("");;
   const cdu = (method, endpoint) => {
-    console.log(endpoint);
     axios(`http://localhost:5000/comment/${endpoint}/${pro_id}`, {
       method: method,
       data: { comment },

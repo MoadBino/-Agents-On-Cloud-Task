@@ -4,14 +4,17 @@ import { Link } from "react-router-dom";
 import Faviortmodal from "../modals/favorit";
 import axios from "axios";
 import Addtocart from "../cart/addtocart";
+import Addprodacit from "../modals/addprodacit";
 import { useDispatch, useSelector } from "react-redux";
 const Home = () => {
   const token = localStorage.getItem("token") || "";
   const [page, setPage] = useState(1);
   const [prodaicts, setProdaicts] = useState("");
   const [open, setOpen] = useState(false);
+  const [openAdd, setOpenAdd] = useState(false);
   const [method, setmethod] = useState("");
   const [id, setId] = useState("");
+  const [faviort_id, setFaviort_id] = useState([-1]);
 
   const state = useSelector((state) => {
     return {
@@ -20,66 +23,100 @@ const Home = () => {
   });
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/Products/getall/${page}`)
-      .then((resulit) => {
-        setProdaicts(resulit.data.result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    console.log(false);
+    if (!open) {
+      axios
+        .get(`http://localhost:5000/Products/getall`)
+        .then((resulit) => {
+          const newResulit=resulit.data.result.reverse()
+          setProdaicts(newResulit);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [open]);
 
   return (
-    <div className="maindiv">
-      {prodaicts &&
-        prodaicts.map((element) => {
-          let color = "black";
-          return (
-            <div className="mainpro" key={element.product_id}>
-              <Link to={`/byid/${element.product_id}`}>
-                <p> {element.title} </p>
-                <img style={{ width: "200px" }} src={element.picUrlProd}></img>
-              </Link>
-              <div className="favCart">
-                <button
-                  onClick={() => {
-                    let id = element.product_id;
-                    let price = +element.price;
-                    Addtocart(id, price);
-                  }}
-                >
-                  add to cart
-                </button>
-                {state.faviort.includes(element.product_id) ? (
-                  <button
-                    style={{ backgroundColor: "gold" }}
-                    onClick={() => {
-                      setmethod("delete");
-                      setId(element.product_id);
-                      setOpen(true);
-                    }}
-                  >
-                    delete from faviort
-                  </button>
-                ) : (
-                  <button
-                    style={{ backgroundColor: { color } }}
-                    onClick={() => {
-                      setmethod("post");
-                      setId(element.product_id);
-                      setOpen(true);
-                    }}
-                  >
-                    add to faviort
-                  </button>
-                )}
-              </div>
-            </div>
-          );
-        })}
+    <div>
+      <button
+        style={{
+          width: "7rem",
+          height: "2rem",
+          fontSize: "1rem",
+          marginBottom: "3rem",
+        }}
+        onClick={() => {
+          setOpenAdd(true);
+        }}
+      >
+        Add prodacit
+      </button>
 
-      <Faviortmodal open={open} method={method} id={id} setOpen={setOpen} />
+      <div className="maindiv">
+        {prodaicts &&
+          prodaicts.map((element) => {
+            let color = "black";
+            return (
+              <div className="mainpro" key={element.product_id}>
+                <Link to={`/byid/${element.product_id}`}>
+                  <p> {element.title} </p>
+                  <img
+                    style={{ width: "200px" }}
+                    src={element.picUrlProd}
+                  ></img>
+                </Link>
+                <div className="favCart">
+                  <button
+                        style={{borderRadius:"5px" }}
+                    onClick={() => {
+                      let id = element.product_id;
+                      let price = +element.price;
+                      Addtocart(id, price);
+                    }}
+                  >
+                    add to cart
+                  </button>
+                  {state.faviort.includes(element.product_id) ||
+                  faviort_id.includes(element.product_id) ? (
+                    <button
+                      style={{ backgroundColor: "gold",borderRadius:"5px" }}
+                      onClick={() => {
+                        setmethod("delete");
+                        setId(element.product_id);
+                        setOpen(true);
+                      }}
+                    >
+                      delete from faviort
+                    </button>
+                  ) : (
+                    <button
+                    
+                      style={{ backgroundColor: "white" ,borderRadius:"5px"}}
+                      onClick={() => {
+                        setmethod("post");
+                        setId(element.product_id);
+                        setOpen(true);
+                      }}
+                    >
+                      add to faviort
+                    </button>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+
+        <Faviortmodal
+          open={open}
+          method={method}
+          id={id}
+          setOpen={setOpen}
+          setFaviort_id={setFaviort_id}
+          faviort_id={faviort_id}
+        />
+        <Addprodacit openAdd={openAdd} setOpenAdd={setOpenAdd} />
+      </div>
     </div>
   );
 };

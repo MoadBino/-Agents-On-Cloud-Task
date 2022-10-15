@@ -7,7 +7,6 @@ export const loginSlice = createSlice({
   },
   reducers: {
     login: (state, action) => {
-      console.log(action.payload);
       state.islogin = true;
       localStorage.setItem("token", action.payload);
       localStorage.setItem("islogin", true);

@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./styel.css";
 import axios from "axios";
-const Faviortmodal = ({ method, id, open, setOpen }) => {
+const Faviortmodal = ({
+  method,
+  id,
+  open,
+  setOpen,
+  setFaviort_id,
+  faviort_id,
+}) => {
   const token = localStorage.getItem("token") || "";
   const [openmodal, setOpenmodal] = useState(false);
   useEffect(() => {
@@ -17,6 +24,15 @@ const Faviortmodal = ({ method, id, open, setOpen }) => {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((resulit) => {
+        if (method === "post") {
+          const newfav = faviort_id.concat([id]);
+          setFaviort_id(newfav);
+        } else if(faviort_id) {
+          const idIndex = faviort_id.indexOf(id);
+          const newfaviort_id = faviort_id.splice(0, idIndex);
+          console.log(newfaviort_id);
+          setFaviort_id(newfaviort_id);
+        }
         setOpenmodal(false);
         setOpen(false);
       })

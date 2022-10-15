@@ -1,9 +1,12 @@
 .mainfav {
   display: grid;
+  grid-template-columns: auto auto auto auto;
   justify-content: center;
-  grid-template-columns: auto auto;
-  align-items: center;
-  gap: 3rem;
+  gap: 5rem;
+}
+
+.childfav {
+
 }
 .chhhildfav {
   display: grid;
@@ -11,5 +14,4 @@
   justify-content: center;
   width: 15rem;
   border-style: solid;
-
 }

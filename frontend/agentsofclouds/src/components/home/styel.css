@@ -7,13 +7,12 @@
   height: 23rem;
   justify-content: center;
   justify-items: center;
-  
 }
-.mainpro button{
+.mainpro button {
   width: 100%;
   font-size: larger;
 }
-.mainpro p{
+.mainpro p {
   margin-bottom: 7px;
   text-align: center;
   font-size: larger;
@@ -21,8 +20,10 @@
 }
 .maindiv {
   display: grid;
-  justify-content: space-evenly;
   grid-template-columns: auto auto auto auto;
+  justify-content: center;
+  gap: 6rem;
+
 }
 
 .favCart {

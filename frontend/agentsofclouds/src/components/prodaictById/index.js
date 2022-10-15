@@ -27,7 +27,6 @@ const Byid = () => {
           setMethod(Method);
           setOpen(true);
           setPro_id(Product_id);
-          console.log(Product_id);
         }}
       >
         {value}

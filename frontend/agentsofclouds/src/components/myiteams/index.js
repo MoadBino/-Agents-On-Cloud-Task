@@ -27,7 +27,7 @@ const Myiteams = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((resulit) => {
-        dispatch(getUserProducts(resulit.data.result));
+        dispatch(getUserProducts(resulit.data.result.reverse()));
       })
       .catch((err) => {
         console.log(err);
@@ -40,7 +40,6 @@ const Myiteams = () => {
         state.userPordicts.map((element) => {
           let title = element.title.split(" ").slice(0, 5).join(" ");
 
-          console.log(title);
           return (
             <div className="mainMyiteam" key={element.product_id}>
               <Link to={`/byid/${element.product_id}`}>
