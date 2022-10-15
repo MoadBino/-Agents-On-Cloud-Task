@@ -1,0 +1,19 @@
+.mainMyiteam{
+ 
+    display: grid;
+    border-style: outset;
+    align-items: center;
+    width: 20rem;
+    margin-bottom: 2rem;
+    height: 23rem;
+    justify-content: center;
+    justify-items: center;
+}
+.mainMyIteam{
+    display: grid;
+    justify-content: space-evenly;
+    grid-template-columns: auto auto auto auto;
+}
+.ProfileButton button{
+    font-size: large;
+}

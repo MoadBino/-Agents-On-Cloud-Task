@@ -36,11 +36,12 @@ const Home = () => {
         prodaicts.map((element) => {
           let color = "black";
           return (
-              <Link to={`/byid/${element.product_id}`}>
             <div className="mainpro" key={element.product_id}>
+              <Link to={`/byid/${element.product_id}`}>
                 <p> {element.title} </p>
                 <img style={{ width: "200px" }} src={element.picUrlProd}></img>
-                <div className="favCart">
+              </Link>
+              <div className="favCart">
                 <button
                   onClick={() => {
                     let id = element.product_id;
@@ -73,9 +74,8 @@ const Home = () => {
                     add to faviort
                   </button>
                 )}
-                </div>
+              </div>
             </div>
-              </Link>
           );
         })}
 

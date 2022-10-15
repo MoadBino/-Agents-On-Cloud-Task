@@ -29,13 +29,11 @@ const Prodactmodal = ({ method, id, open, setOpen }) => {
   }, [open]);
 
   const updateAndDelete = (endPoint) => {
-    console.log(method, endPoint, id);
     axios(`http://localhost:5000/Products/${endPoint}/${id}`, {
       method: method,
       data: { title, product_name, price, description },
     })
       .then((resulit) => {
-        console.log(resulit);
         setOpenmodal(false);
         setOpen(false);
         if (method === "post") {

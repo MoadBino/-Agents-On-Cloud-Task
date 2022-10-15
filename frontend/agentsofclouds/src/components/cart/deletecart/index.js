@@ -7,7 +7,6 @@ const Deletecart = (id) => {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((resulit) => {
-      console.log(resulit);
 
     })
     .catch((err) => {

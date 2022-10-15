@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const Addtocart = (product_id, price_checkout) => {
-  console.log(product_id);
   const token = localStorage.getItem("token") || "";
   axios
     .post(
@@ -10,8 +9,6 @@ const Addtocart = (product_id, price_checkout) => {
       { headers: { Authorization: `Bearer ${token}` } }
     )
     .then((resulit) => {
-      console.log(resulit);
-      console.log(token);
     })
     .catch((er) => {
       console.log(er);

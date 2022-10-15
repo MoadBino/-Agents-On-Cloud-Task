@@ -29,9 +29,13 @@ export const prodaictSlice = createSlice({
         return element.product_id !== action.payload;
       });
     },
+    addprodact: (state, action)=>{
+      
+    },
   },
 });
 
-export const { getUserProducts, updateProdact ,deleteProdact } = prodaictSlice.actions;
+export const { getUserProducts, updateProdact, deleteProdact } =
+  prodaictSlice.actions;
 
 export default prodaictSlice.reducer;

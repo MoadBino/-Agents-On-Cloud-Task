@@ -33,7 +33,7 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      {/* <Addprodaict/> */}
+      <Addprodaict/> 
       <Routes>
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/myiteams" element={<Myiteams />}></Route>

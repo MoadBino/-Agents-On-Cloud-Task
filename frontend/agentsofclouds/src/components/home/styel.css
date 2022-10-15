@@ -6,15 +6,25 @@
   margin-bottom: 2rem;
   height: 23rem;
   justify-content: center;
+  justify-items: center;
+  
+}
+.mainpro button{
+  width: 100%;
+  font-size: larger;
+}
+.mainpro p{
+  margin-bottom: 7px;
+  text-align: center;
+  font-size: larger;
+  color: black;
 }
 .maindiv {
   display: grid;
   justify-content: space-evenly;
   grid-template-columns: auto auto auto auto;
 }
-.mainpro img{
 
-}
 .favCart {
   display: flex;
   gap: 2rem;

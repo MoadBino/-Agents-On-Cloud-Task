@@ -1,0 +1,26 @@
+.mainComment {
+  margin-top: 2rem;
+  padding: 1rem;
+  border-bottom-style:solid ;
+}
+#commentButton {
+
+  font-size: medium;
+  float: right;
+  height: 2rem;
+  width: 10rem;
+}
+.Comments {
+  display: grid;
+  justify-content: center;
+}
+.buttons{
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+#username {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: grid;
+}

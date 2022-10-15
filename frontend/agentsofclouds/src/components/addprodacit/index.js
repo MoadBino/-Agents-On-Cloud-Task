@@ -22,7 +22,6 @@ const Addprodaict = () => {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        console.log(data.url);
         axios
           .post(
             "http://localhost:5000/Products/add/",
@@ -35,9 +34,7 @@ const Addprodaict = () => {
             },
             { headers: { Authorization: `Bearer ${token}` } }
           )
-          .then((resulit) => {
-
-          })
+          .then((resulit) => {})
           .catch((err) => {
             console.log(err);
           });

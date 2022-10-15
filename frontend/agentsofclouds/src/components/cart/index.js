@@ -24,7 +24,6 @@ const Cart = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((resulit) => {
-        console.log(resulit.data.resulit);
         dispatch(getcart(resulit.data.resulit));
       })
       .catch((err) => {
@@ -37,10 +36,10 @@ const Cart = () => {
       {state.cart &&
         state.cart.map((element) => {
           return (
-            <div>
+            <div className="mainimgquan">
               <div className="imgquan">
                 <img style={{ width: "100px" }} src={element.picUrlProd}></img>
-                <p> {element.title} </p>
+                <p style={{ width: "30%" }}> {element.title} </p>
                 <div className="quantity">
                   <button
                     onClick={() => {
@@ -50,15 +49,17 @@ const Cart = () => {
                             id: element.cart_id,
                             quantity: element.quantity,
                           })
-                          );
-                          Deletecart(element.product_id);
+                        );
+                        Deletecart(element.product_id);
                       } else {
                         dispatch(
                           deletequantity({
                             id: element.cart_id,
                             quantity: element.quantity,
                           })
+                          
                         );
+                        Deletecart(element.product_id);
                       }
                     }}
                   >

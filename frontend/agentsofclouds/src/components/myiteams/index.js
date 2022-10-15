@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import "./styel.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { getUserProducts } from "../redux/reducer/prodact/prodacts";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Prodactmodal from "../modals/prodact";
 const Myiteams = () => {
@@ -25,7 +27,6 @@ const Myiteams = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((resulit) => {
-
         dispatch(getUserProducts(resulit.data.result));
       })
       .catch((err) => {
@@ -34,31 +35,48 @@ const Myiteams = () => {
   }, []);
 
   return (
-    <div className="maindiv">
+    <div className="mainMyIteam">
       {state.userPordicts &&
         state.userPordicts.map((element) => {
+          let title = element.title.split(" ").slice(0, 5).join(" ");
+
+          console.log(title);
           return (
-            <div className="mainpro" key={element.product_id}>
-              <p> {element.title} </p>
-              <img style={{ width: "200px" }} src={element.picUrlProd}></img>
-              <button
-                onClick={() => {
-                  setId(element.product_id);
-                  setOpen(true);
-                  setMethod("post");
-                }}
-              >
-                update
-              </button>
-              <button
-                onClick={() => {
-                  setId(element.product_id);
-                  setOpen(true);
-                  setMethod("delete");
-                }}
-              >
-                delete
-              </button>
+            <div className="mainMyiteam" key={element.product_id}>
+              <Link to={`/byid/${element.product_id}`}>
+                <div style={{ width: "20rem" }}>
+                  <h3
+                    style={{
+                      color: "black",
+                      marginBottom: "1rem",
+                      padding: "10px",
+                    }}
+                  >
+                    {title}
+                  </h3>
+                </div>
+                <img style={{ width: "200px" }} src={element.picUrlProd}></img>
+              </Link>
+              <div className="ProfileButton">
+                <button
+                  onClick={() => {
+                    setId(element.product_id);
+                    setOpen(true);
+                    setMethod("post");
+                  }}
+                >
+                  update
+                </button>
+                <button
+                  onClick={() => {
+                    setId(element.product_id);
+                    setOpen(true);
+                    setMethod("delete");
+                  }}
+                >
+                  delete
+                </button>
+              </div>
             </div>
           );
         })}

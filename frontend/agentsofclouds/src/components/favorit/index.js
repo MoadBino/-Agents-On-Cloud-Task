@@ -1,4 +1,5 @@
 import axios from "axios";
+import "./styel.css"
 import React, { useState, useEffect } from "react";
 import Faviortmodal from "../modals/favorit";
 import { getFavoritList } from "../redux/reducer/Favorit";
@@ -33,18 +34,20 @@ const Favorit = () => {
       {state.faviort &&
         state.faviort.map((element) => {
           return (
-            <div>
-              <img style={{ width: "200px" }} src={element.picUrlProd}></img>
-              <p> {element.title} </p>
-              <button
-                onClick={() => {
-                  setmethod("delete");
-                  setId(element.product_id);
-                  setOpen(true);
-                }}
-              >
-                Remove
-              </button>
+            <div className="mainfav">
+              <div className="chhhildfav">
+                <p> {element.title} </p>
+                <img style={{ width: "200px" }} src={element.picUrlProd}></img>
+                <button
+                  onClick={() => {
+                    setmethod("delete");
+                    setId(element.product_id);
+                    setOpen(true);
+                  }}
+                >
+                  Remove
+                </button>
+              </div>
             </div>
           );
         })}

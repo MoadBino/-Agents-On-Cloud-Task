@@ -1,0 +1,15 @@
+.mainfav {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: auto auto;
+  align-items: center;
+  gap: 3rem;
+}
+.chhhildfav {
+  display: grid;
+  text-align: center;
+  justify-content: center;
+  width: 15rem;
+  border-style: solid;
+
+}

@@ -15,7 +15,6 @@ const Register = () => {
         password,
       })
       .then((resluit) => {
-        console.log(resluit);
         navigate("/login");
       })
       .catch((err) => {
