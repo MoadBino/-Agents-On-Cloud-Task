@@ -82,3 +82,22 @@ const Faviortmodal = ({
 };
 
 export default Faviortmodal;
+
+
+
+
+`
+Dear Ms.Nour Alkhatib,
+
+I hope you are doing well.
+
+As per your request, please find below the task's hyperlinks:
+
+GitHub repository
+
+
+If you require any further information please don't hesitate to reach out. I’m really looking forward to becoming a part of Agents On Cloud.
+
+Regards,
+Moath
+0778 945 487`

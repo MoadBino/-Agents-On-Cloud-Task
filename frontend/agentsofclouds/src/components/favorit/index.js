@@ -36,12 +36,11 @@ const Favorit = () => {
           return (
             <div className="childfav">
               <div className="chhhildfav">
-                <h3 style={{borderBottomStyle:"outset"}}> {element.title} </h3>
+                <h3 style={{ borderBottomStyle: "outset" }}>{element.title}</h3>
                 <img style={{ width: "200px" }} src={element.picUrlProd}></img>
                 <button
-                style={{marginTop:"1rem",marginBottom:"1rem"}}
+                  style={{ marginTop: "1rem", marginBottom: "1rem" }}
                   onClick={() => {
-                    
                     setmethod("delete");
                     setId(element.product_id);
                     setOpen(true);
