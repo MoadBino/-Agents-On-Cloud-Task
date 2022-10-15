@@ -26,7 +26,7 @@ const login = (req, res) => {
           const payload = {
             user_id: result[0].user_id,
           };
-          const secret = process.env.SECRET;
+          const secret = "221B";
           const token = jwt.sign(payload, secret);
           res.status(200).json({
             success: true,

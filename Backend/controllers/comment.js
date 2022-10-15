@@ -1,11 +1,13 @@
 const connection = require("../models/db");
 
 const addComment = (req, res) => {
+
+  const { user_id } = req.token;
   const { id } = req.params;
-  const { product_id, comment } = req.body;
+  const { comment } = req.body;
   const query =
     "INSERT INTO comments (comment,product_id,user_id) VALUES (?,?,?)";
-  const data = [comment, product_id, id];
+  const data = [comment, id, user_id];
   connection.query(query, data, (err, resulit) => {
     if (err) {
       res.status(500).json({
@@ -23,11 +25,12 @@ const addComment = (req, res) => {
 };
 
 const getComment = (req, res) => {
+  const { user_id } = req.token;
   const { id } = req.params;
-  const { product_id } = req.body;
+  console.log(user_id, id);
   const query =
-    "SELECT * FROM comments RIGHT JOIN users ON comments.product_id = users.user_id WHERE comments.product_id=? AND is_deleted=0";
-  const data = [product_id];
+    "SELECT * FROM comments INNER JOIN Products ON comments.product_id =Products.product_id INNER JOIN USERS ON comments.user_id=users.user_id WHERE comments.product_id=? AND comments.user_id=?";
+  const data = [id, user_id];
   connection.query(query, data, (err, resulit) => {
     if (err) {
       res.status(500).json({
@@ -47,7 +50,8 @@ const getComment = (req, res) => {
 const deleteComment = (req, res) => {
   const { id } = req.params;
   const data = [id];
-  const query = "UPDATE comments SET is_deleted=1 WHERE comments_id=?";
+  console.log(id);
+  const query = "  DELETE FROM comments WHERE comments_id=?";
 
   connection.query(query, data, (err, resulit) => {
     if (err) {
@@ -68,6 +72,7 @@ const deleteComment = (req, res) => {
 const updateComment = (req, res) => {
   const { id } = req.params;
   const { comment } = req.body;
+  console.log(id,comment);
   const data = [comment, id];
   const query = "UPDATE comments SET comment=? WHERE comments_id=?";
 
@@ -87,4 +92,4 @@ const updateComment = (req, res) => {
   });
 };
 
-module.exports = { addComment, getComment, deleteComment ,updateComment};
+module.exports = { addComment, getComment, deleteComment, updateComment };

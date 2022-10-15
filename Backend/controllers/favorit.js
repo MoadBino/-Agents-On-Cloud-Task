@@ -1,10 +1,10 @@
 const connection = require("../models/db");
 
 const addTofavorit = (req, res) => {
-  const { user_id } = req.params;
-  const { product_id } = req.body;
+  const { user_id } = req.token;
+  const { id } = req.params;
   const query = "INSERT INTO favorite_list (product_id,user_id) VALUES (?,?)";
-  const data = [product_id, user_id];
+  const data = [id, user_id];
   connection.query(query, data, (err, result) => {
     if (err) {
       res.status(500).json({
@@ -22,7 +22,7 @@ const addTofavorit = (req, res) => {
 };
 
 const getfavorit = (req, res) => {
-  const { user_id } = req.params;
+  const { user_id } = req.token;
   const query = `SELECT * FROM favorite_list INNER JOIN Products ON favorite_list.product_id =Products.product_id  WHERE favorite_list.user_id=? `;
 
   const data = [user_id];
@@ -44,8 +44,10 @@ const getfavorit = (req, res) => {
 
 const deleteFromfavorit = (req, res) => {
   const { id } = req.params;
-  const query = "DELETE FROM favorite_list WHERE favorite_list=?";
-  const data = [id];
+  const {user_id} = req.token;
+  console.log("helloworld");
+  const query = "DELETE FROM favorite_list WHERE user_id=? AND product_id=?";
+  const data = [user_id, id];
   connection.query(query, data, (err, result) => {
     if (err) {
       res.status(500).json({
