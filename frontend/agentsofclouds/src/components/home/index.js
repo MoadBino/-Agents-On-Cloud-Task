@@ -4,9 +4,13 @@ import { Link } from "react-router-dom";
 import Faviortmodal from "../modals/favorit";
 import axios from "axios";
 import Addtocart from "../cart/addtocart";
+import { useNavigate } from "react-router-dom";
+import { getUserProducts } from "../redux/reducer/prodact/prodacts";
 import Addprodacit from "../modals/addprodacit";
 import { useDispatch, useSelector } from "react-redux";
 const Home = () => {
+  const Navigate = useNavigate();
+  const dispath = useDispatch();
   const token = localStorage.getItem("token") || "";
   const [page, setPage] = useState(1);
   const [prodaicts, setProdaicts] = useState("");
@@ -19,6 +23,7 @@ const Home = () => {
   const state = useSelector((state) => {
     return {
       faviort: state.favorit.FavoritId,
+      prodaict: state.prodaict.prodaict,
     };
   });
 
@@ -28,14 +33,15 @@ const Home = () => {
       axios
         .get(`http://localhost:5000/Products/getall`)
         .then((resulit) => {
-          const newResulit=resulit.data.result.reverse()
+          const newResulit = resulit.data.result.reverse();
           setProdaicts(newResulit);
+          dispath(getUserProducts(newResulit));
         })
         .catch((err) => {
           console.log(err);
         });
     }
-  }, [open]);
+  }, [open || openAdd]);
 
   return (
     <div>
@@ -45,8 +51,12 @@ const Home = () => {
           height: "2rem",
           fontSize: "1rem",
           marginBottom: "3rem",
+          marginLeft:"50%"
         }}
         onClick={() => {
+          if (!token) {
+            Navigate("/login");
+          }
           setOpenAdd(true);
         }}
       >
@@ -54,9 +64,8 @@ const Home = () => {
       </button>
 
       <div className="maindiv">
-        {prodaicts &&
-          prodaicts.map((element) => {
-            let color = "black";
+        {state.prodaict &&
+          state.prodaict.map((element) => {
             return (
               <div className="mainpro" key={element.product_id}>
                 <Link to={`/byid/${element.product_id}`}>
@@ -68,8 +77,11 @@ const Home = () => {
                 </Link>
                 <div className="favCart">
                   <button
-                        style={{borderRadius:"5px" }}
+                    style={{ borderRadius: "5px" }}
                     onClick={() => {
+                      if (!token) {
+                        Navigate("/login");
+                      }
                       let id = element.product_id;
                       let price = +element.price;
                       Addtocart(id, price);
@@ -80,7 +92,7 @@ const Home = () => {
                   {state.faviort.includes(element.product_id) ||
                   faviort_id.includes(element.product_id) ? (
                     <button
-                      style={{ backgroundColor: "gold",borderRadius:"5px" }}
+                      style={{ backgroundColor: "gold", borderRadius: "5px" }}
                       onClick={() => {
                         setmethod("delete");
                         setId(element.product_id);
@@ -91,9 +103,11 @@ const Home = () => {
                     </button>
                   ) : (
                     <button
-                    
-                      style={{ backgroundColor: "white" ,borderRadius:"5px"}}
+                      style={{ backgroundColor: "white", borderRadius: "5px" }}
                       onClick={() => {
+                        if (!token) {
+                          Navigate("/login");
+                        }
                         setmethod("post");
                         setId(element.product_id);
                         setOpen(true);

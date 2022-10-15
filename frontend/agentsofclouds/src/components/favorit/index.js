@@ -39,6 +39,7 @@ const Favorit = () => {
                 <h3 style={{borderBottomStyle:"outset"}}> {element.title} </h3>
                 <img style={{ width: "200px" }} src={element.picUrlProd}></img>
                 <button
+                style={{marginTop:"1rem",marginBottom:"1rem"}}
                   onClick={() => {
                     
                     setmethod("delete");

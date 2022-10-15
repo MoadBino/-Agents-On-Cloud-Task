@@ -1,8 +1,11 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import "./styel.css";
+import { useDispatch } from "react-redux";
+import { addprodact } from "../../redux/reducer/prodact/prodacts";
 import { useNavigate } from "react-router-dom";
 const Addprodacit = ({ openAdd, setOpenAdd }) => {
+  const dispath = useDispatch();
   const token = localStorage.getItem("token") || "";
   const Navigate = useNavigate();
   const [title, Settitle] = useState("");
@@ -37,6 +40,7 @@ const Addprodacit = ({ openAdd, setOpenAdd }) => {
           )
           .then((resulit) => {
             setOpenmodal(false);
+            setOpenAdd(false)
           })
           .catch((err) => {
             console.log(err);
@@ -102,9 +106,13 @@ const Addprodacit = ({ openAdd, setOpenAdd }) => {
                     type="file"
                     onChange={(e) => setImage(e.target.files[0])}
                   ></input>
-                  <button onClick={()=>{
-                    uploadImage()
-                  }}>Upload</button>
+                  <button
+                    onClick={() => {
+                      uploadImage();
+                    }}
+                  >
+                    Upload
+                  </button>
                 </div>
               </div>
             </div>

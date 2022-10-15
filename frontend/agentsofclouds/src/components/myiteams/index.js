@@ -54,10 +54,11 @@ const Myiteams = () => {
                     {title}
                   </h3>
                 </div>
-                <img style={{ width: "200px" }} src={element.picUrlProd}></img>
+                <img style={{ width: "200px" ,marginLeft:"3rem"}} src={element.picUrlProd}></img>
               </Link>
               <div className="ProfileButton">
                 <button
+                  style={{ marginRight: "1rem", width: "7rem" }}
                   onClick={() => {
                     setId(element.product_id);
                     setOpen(true);
@@ -67,6 +68,7 @@ const Myiteams = () => {
                   update
                 </button>
                 <button
+                  style={{ marginRight: "1rem", width: "7rem" }}
                   onClick={() => {
                     setId(element.product_id);
                     setOpen(true);

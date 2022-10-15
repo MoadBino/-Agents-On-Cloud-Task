@@ -29,13 +29,14 @@ export const prodaictSlice = createSlice({
         return element.product_id !== action.payload;
       });
     },
-    addprodact: (state, action)=>{
-      
+    addprodact: (state, action) => {
+      console.log(action.payload);
+      state.prodaict.unshift(action.payload);
     },
   },
 });
 
-export const { getUserProducts, updateProdact, deleteProdact } =
+export const { getUserProducts, updateProdact, deleteProdact, addprodact } =
   prodaictSlice.actions;
 
 export default prodaictSlice.reducer;
