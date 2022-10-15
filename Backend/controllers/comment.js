@@ -27,7 +27,6 @@ const addComment = (req, res) => {
 const getComment = (req, res) => {
   const { user_id } = req.token;
   const { id } = req.params;
-  console.log(user_id, id);
   const query =
     "SELECT * FROM comments INNER JOIN Products ON comments.product_id =Products.product_id INNER JOIN USERS ON comments.user_id=users.user_id WHERE comments.product_id=? AND comments.user_id=?";
   const data = [id, user_id];
@@ -50,7 +49,6 @@ const getComment = (req, res) => {
 const deleteComment = (req, res) => {
   const { id } = req.params;
   const data = [id];
-  console.log(id);
   const query = "  DELETE FROM comments WHERE comments_id=?";
 
   connection.query(query, data, (err, resulit) => {
@@ -72,7 +70,6 @@ const deleteComment = (req, res) => {
 const updateComment = (req, res) => {
   const { id } = req.params;
   const { comment } = req.body;
-  console.log(id,comment);
   const data = [comment, id];
   const query = "UPDATE comments SET comment=? WHERE comments_id=?";
 

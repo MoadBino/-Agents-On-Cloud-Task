@@ -45,7 +45,6 @@ const getfavorit = (req, res) => {
 const deleteFromfavorit = (req, res) => {
   const { id } = req.params;
   const {user_id} = req.token;
-  console.log("helloworld");
   const query = "DELETE FROM favorite_list WHERE user_id=? AND product_id=?";
   const data = [user_id, id];
   connection.query(query, data, (err, result) => {

@@ -3,7 +3,6 @@ const connection = require("../models/db");
 const addProducts = (req, res) => {
   const { picUrlProd, title, product_name, price, description } = req.body;
   const { user_id } = req.token;
-  console.log(user_id);
   const data = [picUrlProd, title, product_name, price, description, user_id];
   const query = `INSERT INTO Products (picUrlProd,title,product_name,price,description,user_id) VALUES (?,?,?,?,?,?)`;
   connection.query(query, data, (err, result) => {
