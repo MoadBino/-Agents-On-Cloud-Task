@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import { getcart } from "../redux/reducer/cart";
 import { useDispatch, useSelector } from "react-redux";
 import { addquantity } from "../redux/reducer/cart/index";

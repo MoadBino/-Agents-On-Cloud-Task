@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./styel.css";
-import prodacts from "../../redux/reducer/prodact/prodacts";
 const CDUComment = ({ method, setOpen, open, pro_id }) => {
   const token = localStorage.getItem("token") || "";
   const [openmodal, setOpenmodal] = useState(false);

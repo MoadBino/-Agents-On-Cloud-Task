@@ -5,7 +5,7 @@ const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "0000",
-  database: 5000,
+  database: "agentsoncloud",
 });
 
 connection.connect((err) => {

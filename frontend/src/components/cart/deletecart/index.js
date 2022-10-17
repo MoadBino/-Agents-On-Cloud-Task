@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useDispatch } from "react-redux";
 const Deletecart = (id) => {
   const token = localStorage.getItem("token") || "";
   axios

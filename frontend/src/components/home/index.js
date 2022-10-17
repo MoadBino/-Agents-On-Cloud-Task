@@ -12,8 +12,6 @@ const Home = () => {
   const Navigate = useNavigate();
   const dispath = useDispatch();
   const token = localStorage.getItem("token") || "";
-  const [page, setPage] = useState(1);
-  const [prodaicts, setProdaicts] = useState("");
   const [open, setOpen] = useState(false);
   const [openAdd, setOpenAdd] = useState(false);
   const [method, setmethod] = useState("");
@@ -28,13 +26,12 @@ const Home = () => {
   });
 
   useEffect(() => {
-    console.log(false);
     if (!open) {
       axios
         .get(`http://localhost:5000/Products/getall`)
         .then((resulit) => {
+          console.log(resulit);
           const newResulit = resulit.data.result.reverse();
-          setProdaicts(newResulit);
           dispath(getUserProducts(newResulit));
         })
         .catch((err) => {

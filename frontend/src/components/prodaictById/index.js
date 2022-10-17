@@ -6,6 +6,8 @@ import { getcomment } from "../redux/reducer/comment";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 const Byid = () => {
+  const [user_id, setUser_id] = useState("")
+
   const token = localStorage.getItem("token") || "";
   const state = useSelector((state) => {
     return {
@@ -13,7 +15,6 @@ const Byid = () => {
     };
   });
   const dispacth = useDispatch();
-  const [todo, setTodo] = useState("");
   const [method, setMethod] = useState("");
   const [open, setOpen] = useState(false);
   const [prodaict, setProdaict] = useState("");
@@ -52,6 +53,9 @@ const Byid = () => {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((resulit) => {
+          setUser_id(resulit.data.user_id)
+    
+          console.log(resulit.data.user_id);
           dispacth(getcomment(resulit.data.result));
         })
         .catch((err) => {
@@ -66,9 +70,9 @@ const Byid = () => {
         prodaict.map((element, index) => {
           return (
             <div>
-              <h1 style={{marginBottom:"1rem"}}>{element.title}</h1>
+              <h1 style={{ marginBottom: "1rem" }}>{element.title}</h1>
               <img style={{ width: "20rem" }} src={element.picUrlProd}></img>
-              <p style={{width:"80%"}}>{element.description} </p>
+              <p style={{ width: "80%" }}>{element.description} </p>
               {createButton("Add comment", "post", element.product_id)}
             </div>
           );
@@ -89,9 +93,9 @@ const Byid = () => {
                 {element.name}
               </h2>
               <div className="Comments">
-                <h3 style={{width:"80%"}}>{element.comment}</h3>
+                <h3 style={{ width: "80%" }}>{element.comment}</h3>
               </div>
-              {id == element.product_id ? (
+              {user_id == element.user_id ? (
                 <div className="buttons">
                   {createButton("update comment", "put", element.comments_id)}
                   {createButton(
@@ -100,9 +104,11 @@ const Byid = () => {
                     element.comments_id
                   )}
                 </div>
+               
               ) : (
                 ""
               )}
+               <div className="HR"></div>
             </div>
           );
         })}

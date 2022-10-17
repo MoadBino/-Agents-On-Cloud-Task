@@ -1,7 +1,7 @@
 .mainComment {
   margin-top: 2rem;
   padding: 1rem;
-  border-bottom-style:solid ;
+
 }
 #commentButton {
 
@@ -18,9 +18,14 @@
     display: flex;
     gap: 1rem;
     justify-content: flex-end;
+
 }
 #username {
   padding: 1rem;
   margin-bottom: 1rem;
   display: grid;
+}
+.HR{
+  margin-top: 1rem;
+  border-bottom-style:solid;
 }

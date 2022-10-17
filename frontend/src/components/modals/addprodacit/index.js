@@ -1,11 +1,9 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import "./styel.css";
-import { useDispatch } from "react-redux";
-import { addprodact } from "../../redux/reducer/prodact/prodacts";
 import { useNavigate } from "react-router-dom";
 const Addprodacit = ({ openAdd, setOpenAdd }) => {
-  const dispath = useDispatch();
+
   const token = localStorage.getItem("token") || "";
   const Navigate = useNavigate();
   const [title, Settitle] = useState("");
@@ -13,7 +11,6 @@ const Addprodacit = ({ openAdd, setOpenAdd }) => {
   const [product_name, setproduct_name] = useState("");
   const [price, setPrice] = useState(1);
   const [image, setImage] = useState("");
-  const [url, setUrl] = useState("");
   const [openmodal, setOpenmodal] = useState(false);
   const uploadImage = () => {
     const data = new FormData();
@@ -52,6 +49,9 @@ const Addprodacit = ({ openAdd, setOpenAdd }) => {
   };
 
   useEffect(() => {
+    if (!token) {
+      Navigate("/login")
+    }
     if (openAdd) {
       setOpenmodal(true);
     }

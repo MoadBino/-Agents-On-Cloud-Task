@@ -1,7 +1,6 @@
 const connection = require("../models/db");
 
 const addComment = (req, res) => {
-
   const { user_id } = req.token;
   const { id } = req.params;
   const { comment } = req.body;
@@ -28,7 +27,7 @@ const getComment = (req, res) => {
   const { user_id } = req.token;
   const { id } = req.params;
   const query =
-    "SELECT * FROM comments INNER JOIN Products ON comments.product_id =Products.product_id INNER JOIN USERS ON comments.user_id=users.user_id WHERE comments.product_id=? AND comments.user_id=?";
+    "SELECT * FROM comments INNER JOIN Products ON comments.product_id =Products.product_id INNER JOIN USERS ON comments.user_id=users.user_id WHERE comments.product_id=?";
   const data = [id, user_id];
   connection.query(query, data, (err, resulit) => {
     if (err) {
@@ -42,6 +41,7 @@ const getComment = (req, res) => {
     res.status(200).json({
       success: true,
       result: resulit,
+      user_id: user_id,
     });
   });
 };
